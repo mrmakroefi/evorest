@@ -1,12 +1,12 @@
 ###
 # Unity folders and files
 ###
-evorest/[Aa]ssets/AssetStoreTools*
-evorest/[Bb]uild/
+[Aa]ssets/AssetStoreTools*
+[Bb]uild/
 [Ll]ibrary/
 [Ll]ocal[Cc]ache/
 [Oo]bj/
-evorest/[Tt]emp/
+[Tt]emp/
 [Uu]nityGenerated/
 .vs/
 # file on crash reports
