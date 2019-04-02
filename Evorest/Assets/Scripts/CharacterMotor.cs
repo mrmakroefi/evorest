@@ -19,7 +19,7 @@ public class CharacterMotor : MonoBehaviour {
     public float agility = 0.2f;
     public float inAirAgility = 1f;
 
-    protected bool facingRight = true;
+    protected bool isFacingRight = true;
 
     protected bool isDashing = false;
 
@@ -35,15 +35,30 @@ public class CharacterMotor : MonoBehaviour {
         rb2D = GetComponent<Rigidbody2D>();
         coll2D = GetComponent<Collider2D>();
 
-        facingRight = !sprite.flipX;
+        isFacingRight = !sprite.flipX;
 
         currentDashTime = dashTime;
 	}
+    
+    public int getFacingDir {
+        get {
+            return isFacingRight ? 1 : -1;
+        }
+    }
 
     public Collider2D getCollider2D {
         get {
             if (coll2D != null) {
                 return coll2D;
+            }
+            return null;
+        }
+    }
+
+    public Rigidbody2D getRb2D {
+        get {
+            if (rb2D != null) {
+                return rb2D;
             }
             return null;
         }
@@ -55,7 +70,6 @@ public class CharacterMotor : MonoBehaviour {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x-0.02f, 0.05f), 0, groundMask);
         for (int i = 0;i < colliders.Length; i++) {
             grounded = true;
-            break;
         }
 
         // reset double jump
@@ -64,11 +78,11 @@ public class CharacterMotor : MonoBehaviour {
         lastFrameGrounded = grounded;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.02f, 0.05f));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawCube(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.02f, 0.05f));
+    //}
 
 
     protected void Move(float velocity)
@@ -78,9 +92,9 @@ public class CharacterMotor : MonoBehaviour {
         rb2D.velocity = Vector2.SmoothDamp(rb2D.velocity, targetVelocity, ref currentVelocity, targetSmoothTime);
         rb2D.velocity = new Vector2(Mathf.Clamp(rb2D.velocity.x, -maxSpeed, maxSpeed), rb2D.velocity.y);
 
-        if (velocity > 0 && !facingRight) {
+        if (velocity > 0 && !isFacingRight) {
             SpriteFlip();
-        } else if (velocity < 0 && facingRight) {
+        } else if (velocity < 0 && isFacingRight) {
             SpriteFlip();
         }
     }
@@ -88,7 +102,7 @@ public class CharacterMotor : MonoBehaviour {
     private void SpriteFlip()
     {
         sprite.flipX = !sprite.flipX;
-        facingRight = !sprite.flipX;
+        isFacingRight = !sprite.flipX;
     }
 
     protected void Jump()

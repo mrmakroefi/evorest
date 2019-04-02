@@ -27,7 +27,6 @@ public class PlayerInput : CharacterMotor {
         if (!jumpInput) {
             jumpInput = Input.GetKeyDown(KeyCode.Space);
         }
-
     }
 
     protected void FixedUpdate()
@@ -40,7 +39,7 @@ public class PlayerInput : CharacterMotor {
         }
 
         if (dashInput) {
-            dashInput = Dash(facingRight ? 1 : -1);
+            dashInput = Dash(getFacingDir);
         }
     }
 
