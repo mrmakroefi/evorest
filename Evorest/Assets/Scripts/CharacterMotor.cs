@@ -21,9 +21,9 @@ public class CharacterMotor : MonoBehaviour {
 
     protected bool isFacingRight = true;
 
-    protected bool isDashing = false;
+    protected bool isDashing { get; private set; }
 
-    private bool grounded = false;
+    protected bool isGrounded { get; private set; }
     private bool lastFrameGrounded = false;
 
     private bool doubleJumped = false;
@@ -63,19 +63,20 @@ public class CharacterMotor : MonoBehaviour {
             return null;
         }
     }
+    
 
     protected virtual void Update()
     {
-        grounded = false;
+        isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x-0.02f, 0.05f), 0, groundMask);
         for (int i = 0;i < colliders.Length; i++) {
-            grounded = true;
+            isGrounded = true;
         }
 
         // reset double jump
-        if (!lastFrameGrounded && grounded) doubleJumped = false;
+        if (!lastFrameGrounded && isGrounded) doubleJumped = false;
 
-        lastFrameGrounded = grounded;
+        lastFrameGrounded = isGrounded;
     }
 
     //private void OnDrawGizmos()
@@ -87,10 +88,15 @@ public class CharacterMotor : MonoBehaviour {
 
     protected void Move(float velocity)
     {
+        // snappy movement but smooth on the brakes
         float targetSmoothTime = Mathf.Abs(velocity) > 0 ? 0.08f : agility;
-        Vector2 targetVelocity = new Vector2(velocity, rb2D.velocity.y);
+        Vector2 targetVelocity = new Vector2(
+            velocity * maxSpeed,
+            rb2D.velocity.y
+            );
         rb2D.velocity = Vector2.SmoothDamp(rb2D.velocity, targetVelocity, ref currentVelocity, targetSmoothTime);
-        rb2D.velocity = new Vector2(Mathf.Clamp(rb2D.velocity.x, -maxSpeed, maxSpeed), rb2D.velocity.y);
+
+        //rb2D.velocity = new Vector2(Mathf.Clamp(rb2D.velocity.x, -maxSpeed, maxSpeed), rb2D.velocity.y);
 
         if (velocity > 0 && !isFacingRight) {
             SpriteFlip();
@@ -107,7 +113,7 @@ public class CharacterMotor : MonoBehaviour {
 
     protected void Jump()
     {
-        if (grounded) {
+        if (isGrounded) {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
         } else if (!doubleJumped) {
             doubleJumped = true;
@@ -126,6 +132,7 @@ public class CharacterMotor : MonoBehaviour {
         direction = (int)Mathf.Sign(direction);
         rb2D.velocity = new Vector2(direction * dashDistance * ( 1 / dashTime), rb2D.velocity.y);
 
+        // waiting dash timer to end
         currentDashTime -= Time.deltaTime;
         if (currentDashTime <= 0) {
             currentDashTime = dashTime;

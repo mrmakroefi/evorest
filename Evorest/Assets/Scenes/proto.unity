@@ -141,7 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1994836033}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &212827567
 ParticleSystemRenderer:
@@ -4848,6 +4848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 863903265}
   - component: {fileID: 863903264}
+  - component: {fileID: 863903266}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4879,6 +4880,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &863903266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863903263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09efa6773710dac42b918681dd3f4db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &924396655
 GameObject:
   m_ObjectHideFlags: 0
@@ -5082,7 +5094,7 @@ GameObject:
   - component: {fileID: 1505755591}
   - component: {fileID: 1505755592}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5094,11 +5106,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1505755590}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.635807, z: 1}
   m_Children: []
-  m_Father: {fileID: 1994836033}
+  m_Father: {fileID: 1983597928}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1505755592
@@ -5136,7 +5148,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f8155194d1b2329478d73eaa2470316e, type: 3}
+  m_Sprite: {fileID: 21300002, guid: f8155194d1b2329478d73eaa2470316e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5146,6 +5158,54 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1983597927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1983597928}
+  - component: {fileID: 1983597929}
+  m_Layer: 0
+  m_Name: animation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1983597928
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1983597927}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1505755591}
+  m_Father: {fileID: 1994836033}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1983597929
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1983597927}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2676ad926b64bb348a66a208b19f9b16, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1994836030
 GameObject:
   m_ObjectHideFlags: 0
@@ -5157,6 +5217,7 @@ GameObject:
   - component: {fileID: 1994836032}
   - component: {fileID: 1994836031}
   - component: {fileID: 1994836034}
+  - component: {fileID: 1994836035}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -5219,8 +5280,8 @@ Transform:
   m_LocalPosition: {x: -1.18, y: -0.2, z: -0.08961408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1505755591}
   - {fileID: 212827566}
+  - {fileID: 1983597928}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5246,6 +5307,33 @@ MonoBehaviour:
   dashTime: 0.15
   agility: 0.1
   inAirAgility: 0.07
+--- !u!114 &1994836035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1994836030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b33903c8e2a8a438053269c606e501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeCombos:
+  - attackArea:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    damage: 0
+    knockbackPower: 0
+  - attackArea:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    damage: 0
+    knockbackPower: 0
+  - attackArea:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    damage: 0
+    knockbackPower: 0
 --- !u!1 &2012131575
 GameObject:
   m_ObjectHideFlags: 0

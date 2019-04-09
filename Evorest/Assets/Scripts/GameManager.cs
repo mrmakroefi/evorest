@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gm;
 
-    private PlayerInput playerController;
+    private PlayerMovement playerController;
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public PlayerInput player {
+    public PlayerMovement getPlayer {
         get {
             if (playerController != null) {
                 return playerController;

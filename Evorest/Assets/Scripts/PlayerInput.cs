@@ -2,45 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : CharacterMotor {
+public class PlayerInput : MonoBehaviour
+{
+    public static float horizontalInput { get; private set; }
+    public static bool jumpInput { get; private set; }
+    public static bool dashInput { get; private set; }
+    public static bool lightAttackInput { get; private set; }
+    public static bool heavyAttackInput { get; private set; }
 
-    public float horizontalInput { get; private set; }
-    public bool jumpInput { get; private set; }
-    public bool dashInput { get; private set; }
-
-    protected override void Awake()
+    void Update()
     {
-        base.Awake();
-        GameManager.gm.player = this;
-    }
-
-
-    protected override void Update()
-    {
-        base.Update();
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if (!dashInput && !isDashing) {
-            dashInput = Input.GetKeyDown(KeyCode.K);
-        }
+        dashInput = Input.GetKeyDown(KeyCode.LeftShift);
         
-        if (!jumpInput) {
-            jumpInput = Input.GetKeyDown(KeyCode.Space);
-        }
+        jumpInput = Input.GetKeyDown(KeyCode.Space);
+
+        lightAttackInput = Input.GetKeyDown(KeyCode.X);
+        heavyAttackInput = Input.GetKeyDown(KeyCode.C);
+
     }
-
-    protected void FixedUpdate()
-    {
-        float targetVelocity = horizontalInput * maxSpeed;
-        Move(targetVelocity);
-        if (jumpInput) {
-            Jump();
-            jumpInput = false;
-        }
-
-        if (dashInput) {
-            dashInput = Dash(getFacingDir);
-        }
-    }
-
 }
