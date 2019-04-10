@@ -65,9 +65,9 @@ public class CameraController : MonoBehaviour
             );
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(1,1,0,0.1f);
-        Gizmos.DrawCube(boundary.center, boundary.size);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = new Color(1,1,0,0.1f);
+    //    Gizmos.DrawCube(boundary.center, boundary.size);
+    //}
 }
