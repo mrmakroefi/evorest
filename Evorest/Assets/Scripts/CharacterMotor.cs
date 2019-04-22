@@ -26,9 +26,13 @@ public class CharacterMotor : MonoBehaviour {
     protected bool isGrounded { get; private set; }
     private bool lastFrameGrounded = false;
 
+    private int dashDirection = 1;
+
     private bool doubleJumped = false;
 
+    private float tempDashTime = 0;
     private float currentDashTime = 0;
+    private float currentDashDistance = 0;
 
     private Vector2 currentVelocity;
 	protected virtual void Awake () {
@@ -63,7 +67,6 @@ public class CharacterMotor : MonoBehaviour {
             return null;
         }
     }
-    
 
     protected virtual void Update()
     {
@@ -79,13 +82,30 @@ public class CharacterMotor : MonoBehaviour {
         lastFrameGrounded = isGrounded;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawCube(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.02f, 0.05f));
-    //}
+    protected virtual void FixedUpdate()
+    {
+        if (isDashing) {
+            Dashing(dashDirection);
+        }
+    }
 
+    public void Dash(int direction, float dashTime, float dashDistance, bool useEffect = false)
+    {
+        dashDirection = direction;
+        currentDashDistance = dashDistance;
 
+        isDashing = true;
+        if (useEffect) {
+            dashEffect.gameObject.SetActive(true);
+            dashEffect.Play();
+        }
+        // set dash time, determine how long dash last
+        currentDashTime = dashTime;
+        tempDashTime = currentDashTime;
+        // dash as player press button (followed by fixedUpdate call)
+        Dashing(dashDirection);
+    }
+    
     protected void Move(float velocity)
     {
         // snappy movement but smooth on the brakes
@@ -108,6 +128,10 @@ public class CharacterMotor : MonoBehaviour {
     private void SpriteFlip()
     {
         sprite.flipX = !sprite.flipX;
+
+        ParticleSystem.TextureSheetAnimationModule dashSheet = dashEffect.textureSheetAnimation;
+        dashSheet.flipU = sprite.flipX ? 1 : 0;
+
         isFacingRight = !sprite.flipX;
     }
 
@@ -121,25 +145,26 @@ public class CharacterMotor : MonoBehaviour {
         }
     }
 
-    protected bool Dash(int direction)
+    protected bool Dashing(int direction)
     {
-        if (!isDashing) {
-            dashEffect.gameObject.SetActive(true);
-            dashEffect.Play();
-        }
-
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
         direction = (int)Mathf.Sign(direction);
-        rb2D.velocity = new Vector2(direction * dashDistance * ( 1 / dashTime), rb2D.velocity.y);
+        rb2D.velocity = new Vector2(direction * currentDashDistance * ( 1 / currentDashTime), rb2D.velocity.y);
 
         // waiting dash timer to end
-        currentDashTime -= Time.deltaTime;
-        if (currentDashTime <= 0) {
-            currentDashTime = dashTime;
+        tempDashTime -= Time.deltaTime;
+        if (tempDashTime <= 0) {
+            tempDashTime = currentDashTime;
             isDashing = false;
             return false;
         }
         isDashing = true;
         return true;
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawCube(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.02f, 0.05f));
+    //}
 }

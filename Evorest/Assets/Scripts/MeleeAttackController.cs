@@ -14,6 +14,8 @@ public class MeleeAttackController : MonoBehaviour {
         public Rect attackArea;
         public int damage;
         public float knockbackPower;
+        public float dashTime;
+        public float dashDistance;
     };
 
     public Combos[] meleeCombos;
@@ -23,7 +25,7 @@ public class MeleeAttackController : MonoBehaviour {
     [HideInInspector]
     private Combos previewCombo;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();    
     }

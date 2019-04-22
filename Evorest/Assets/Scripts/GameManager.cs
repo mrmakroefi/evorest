@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gm;
 
     private PlayerMovement playerController;
+    private PlayerAttack playerAttack;
 
     private void Awake()
     {
@@ -27,6 +28,19 @@ public class GameManager : MonoBehaviour {
 
         set {
             playerController = value;
+        }
+    }
+
+    public PlayerAttack getPlayerAttack {
+        get {
+            if (playerAttack != null) {
+                return playerAttack;
+            }
+            return null;
+        }
+
+        set {
+            playerAttack = value;
         }
     }
 

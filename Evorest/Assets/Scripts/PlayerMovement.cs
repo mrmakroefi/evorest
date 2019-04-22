@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerMovement : CharacterMotor {
 
     private Animator anim;
-    private bool canDash = false;
 
     protected override void Awake()
     {
@@ -24,15 +23,16 @@ public class PlayerMovement : CharacterMotor {
         anim.SetBool("isDashing", isDashing);
     }
 
-    protected void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         Move(PlayerInput.horizontalInput);
         if (PlayerInput.jumpInput) {
             Jump();
         }
 
-        if (PlayerInput.dashInput && !isDashing || canDash && isDashing) {
-            canDash = Dash(getFacingDir);
+        if (PlayerInput.dashInput && !isDashing) {
+            Dash(getFacingDir, dashTime, dashDistance, true);
         }
     }
 
