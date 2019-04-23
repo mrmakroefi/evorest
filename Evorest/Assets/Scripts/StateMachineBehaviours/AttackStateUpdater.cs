@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetNormalizedTime : StateMachineBehaviour {
+public class AttackStateUpdater : StateMachineBehaviour {
+
+    public float exitTime;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        GameManager.gm.getPlayerAttack.isAttacking = true;
         animator.SetFloat("NormalizedTime", stateInfo.normalizedTime);
     }
 
@@ -14,12 +17,17 @@ public class SetNormalizedTime : StateMachineBehaviour {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetFloat("NormalizedTime", stateInfo.normalizedTime);
+
+        if (exitTime > 0 && animator.GetFloat("NormalizedTime") >= exitTime) {
+            GameManager.gm.getPlayerAttack.isAttacking = false;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        GameManager.gm.getPlayerAttack.isAttacking = false;
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

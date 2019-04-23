@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackCombos : StateMachineBehaviour {
+public class AttackInputReset : StateMachineBehaviour {
 
+    public bool clearOnEnter = false;
     public bool clearOnExit = false;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("L", false);
+        if (clearOnEnter)
+            animator.SetBool("L", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

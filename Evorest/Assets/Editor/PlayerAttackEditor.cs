@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(PlayerAttack))]
+[CustomEditor(typeof(MeleeAttackController),true)]
 public class MeleeAttackControllerEditor : Editor {
     private bool preview = false;
     private int index = 0;
 
     public override void OnInspectorGUI()
     {
-        PlayerAttack melee = (PlayerAttack)target;
+        MeleeAttackController melee = (MeleeAttackController)target;
 
         index = EditorGUILayout.IntSlider("Element Index", index, 0, melee.meleeCombos.Length - 1);
         MeleeAttackController.Combos combo = melee.meleeCombos[index];

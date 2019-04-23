@@ -13,6 +13,7 @@ public class PlayerAttack : MeleeAttackController {
 
     private void Update()
     {
+        //print(isAttacking);
         if (PlayerInput.lightAttackInput) {
             Attack();
         }

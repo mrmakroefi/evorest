@@ -21,18 +21,25 @@ public class PlayerMovement : CharacterMotor {
         anim.SetBool("grounded", isGrounded);
         anim.SetFloat("verticalVelocity", getRb2D.velocity.y);
         anim.SetBool("isDashing", isDashing);
+        anim.SetBool("isMoving", PlayerInput.horizontalInput != 0);
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        Move(PlayerInput.horizontalInput);
+
+        float moveInput = 0;
+        if (!GameManager.gm.getPlayerAttack.isAttacking) {
+            moveInput = PlayerInput.horizontalInput;
+        }
+        Move(moveInput);
+
         if (PlayerInput.jumpInput) {
             Jump();
         }
 
         if (PlayerInput.dashInput && !isDashing) {
-            Dash(getFacingDir, dashTime, dashDistance, true);
+            Dash(getFacingDir, dashTime, dashDistance, false, true);
         }
     }
 

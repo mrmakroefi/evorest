@@ -81,14 +81,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: 0.083333336
+  - time: 0.15
     functionName: Dash
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
-  - time: 0.18333334
+  - time: 0.16666667
     functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 0}

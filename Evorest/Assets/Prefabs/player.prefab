@@ -20,12 +20,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4842733146776518}
   - component: {fileID: 50469873788829584}
-  - component: {fileID: 61560953403391160}
+  - component: {fileID: 60699595872823374}
   - component: {fileID: 114025781488484960}
   - component: {fileID: 114339128762475558}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915763151934316}
   - component: {fileID: 212867529892672760}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4465655303670044}
   - component: {fileID: 198012081493226326}
   - component: {fileID: 199848485475314768}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: dashFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 4908355346653454}
   - component: {fileID: 95780268630441664}
   - component: {fileID: 114607309552697888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: animation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,8 +155,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &61560953403391160
-BoxCollider2D:
+--- !u!60 &60699595872823374
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -167,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007467985, y: -0.060246468}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -177,9 +177,16 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.2111702, y: 0.5690026}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.080371976, y: 0.22415766}
+      - {x: -0.09886181, y: 0.22410823}
+      - {x: -0.11294627, y: 0.19959553}
+      - {x: -0.11301184, y: -0.3228985}
+      - {x: -0.09676719, y: -0.34438664}
+      - {x: 0.08521342, y: -0.3446284}
+      - {x: 0.09825325, y: -0.3251682}
+      - {x: 0.09823096, y: 0.19960928}
 --- !u!95 &95780268630441664
 Animator:
   serializedVersion: 3
@@ -210,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 212867529892672760}
+  dashMeter: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 256
@@ -218,6 +226,7 @@ MonoBehaviour:
   dashEffect: {fileID: 198012081493226326}
   dashDistance: 1
   dashTime: 0.15
+  dashMeterFillingTime: 20
   agility: 0.1
   inAirAgility: 0.07
 --- !u!114 &114339128762475558
@@ -231,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3906276b32d7aba48916bab2c792917e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: 1
   meleeCombos:
   - name: L
     attackArea:
@@ -241,7 +251,9 @@ MonoBehaviour:
       height: 0.67
     damage: 12
     knockbackPower: 0
-  - name: LLL
+    dashTime: 0.15
+    dashDistance: 0.07
+  - name: LL
     attackArea:
       serializedVersion: 2
       x: -0.12
@@ -250,15 +262,31 @@ MonoBehaviour:
       height: 0.57
     damage: 15
     knockbackPower: 0
+    dashTime: 0.15
+    dashDistance: 0.14
   - name: LLL
     attackArea:
       serializedVersion: 2
-      x: 0.06
-      y: -0.23
-      width: 1.04
-      height: 0.51
+      x: -0.33
+      y: -0.31
+      width: 0.9
+      height: 0.41
     damage: 22
     knockbackPower: 0
+    dashTime: 0.15
+    dashDistance: 0.23
+  - name: airbone L
+    attackArea:
+      serializedVersion: 2
+      x: -0.45
+      y: -0.16
+      width: 0.9
+      height: 0.41
+    damage: 13
+    knockbackPower: 0
+    dashTime: 0.1
+    dashDistance: 0.1
+  isAttacking: 0
 --- !u!114 &114607309552697888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,7 +298,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e9be5decb9614458369eefb8747ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 114339128762475558}
+  attackController: {fileID: 114339128762475558}
+  motor: {fileID: 114025781488484960}
 --- !u!198 &198012081493226326
 ParticleSystem:
   m_ObjectHideFlags: 1
