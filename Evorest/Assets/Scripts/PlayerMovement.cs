@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : CharacterMotor {
-
-    private Animator anim;
-
+    
     protected override void Awake()
     {
         base.Awake();
-        GameManager.gm.getPlayer = this;
-        // find first animator in children
-        anim = GetComponentInChildren<Animator>();
+        GameManager.gm.motor = this;
     }
 
     protected override void Update()
@@ -29,7 +25,7 @@ public class PlayerMovement : CharacterMotor {
         base.FixedUpdate();
 
         float moveInput = 0;
-        if (!GameManager.gm.getPlayerAttack.isAttacking) {
+        if (!GameManager.gm.attackController.isAttacking) {
             moveInput = PlayerInput.horizontalInput;
         }
         Move(moveInput);

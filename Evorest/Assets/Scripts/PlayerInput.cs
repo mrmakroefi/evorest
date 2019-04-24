@@ -12,6 +12,8 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gm.motor.isHurt) return;
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         dashInput = Input.GetKeyDown(KeyCode.LeftShift);

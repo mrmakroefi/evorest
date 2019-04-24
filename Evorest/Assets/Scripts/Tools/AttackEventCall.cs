@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackEventCall : MonoBehaviour {
 
-    public MeleeAttackController attackController;
+    public AttackController attackController;
     public CharacterMotor motor;
 
     public void Attack(int index)
@@ -20,7 +20,4 @@ public class AttackEventCall : MonoBehaviour {
             motor.Dash(motor.getFacingDir, dashTime, dashDistance, true);
         }
     }
-
-
-
 }

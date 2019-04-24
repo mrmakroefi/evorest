@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(MeleeAttackController),true)]
+[CustomEditor(typeof(AttackController),true)]
 public class MeleeAttackControllerEditor : Editor {
     private bool preview = false;
     private int index = 0;
 
     public override void OnInspectorGUI()
     {
-        MeleeAttackController melee = (MeleeAttackController)target;
+        AttackController melee = (AttackController)target;
 
         index = EditorGUILayout.IntSlider("Element Index", index, 0, melee.meleeCombos.Length - 1);
-        MeleeAttackController.Combos combo = melee.meleeCombos[index];
+        AttackController.Combos combo = melee.meleeCombos[index];
 
         EditorGUILayout.LabelField((preview ? "(On) " : "(Off) ") + combo.name);
 

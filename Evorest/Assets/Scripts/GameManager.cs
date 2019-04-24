@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public PlayerMovement getPlayer {
+    public PlayerMovement motor {
         get {
             if (playerController != null) {
                 return playerController;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public PlayerAttack getPlayerAttack {
+    public PlayerAttack attackController {
         get {
             if (playerAttack != null) {
                 return playerAttack;

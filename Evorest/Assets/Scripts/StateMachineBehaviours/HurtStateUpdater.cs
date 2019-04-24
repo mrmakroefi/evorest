@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackStateUpdater : StateMachineBehaviour {
+public class HurtStateUpdater : StateMachineBehaviour {
 
     [HideInInspector]
     public AttackController attackController;
@@ -10,7 +10,7 @@ public class AttackStateUpdater : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        attackController.SetIsAttack(true);
+        attackController.motor.SetIsHurt(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -21,7 +21,7 @@ public class AttackStateUpdater : StateMachineBehaviour {
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        attackController.SetIsAttack(false);
+        attackController.motor.SetIsHurt(false);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

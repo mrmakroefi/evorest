@@ -7,9 +7,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class CharacterMotor : MonoBehaviour
 {
-
     private Rigidbody2D rb2D;
     private Collider2D coll2D;
+    public Animator anim { get; private set; }
+    private AttackController attackController;
 
     public SpriteRenderer sprite;                   // main sprite renderer
     public Image dashMeter;
@@ -24,11 +25,10 @@ public class CharacterMotor : MonoBehaviour
     public float inAirAgility = 1f;
 
     protected bool isFacingRight = true;
-
     public bool isDashing { get; private set; }
-
     protected bool isGrounded { get; private set; }
     private bool lastFrameGrounded = false;
+    public bool isHurt { get; private set; }
 
     private int dashDirection = 1;
 
@@ -41,11 +41,21 @@ public class CharacterMotor : MonoBehaviour
 
     private bool customDash = false;
 
+    private AttackStateUpdater[] attackStateUpdaters;
+    private HurtStateUpdater[] hurtStateUpdaters;
+
     private Vector2 currentVelocity;
     protected virtual void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         coll2D = GetComponent<Collider2D>();
+        attackController = GetComponent<AttackController>();
+        anim = GetComponentInChildren<Animator>();
+
+        if (attackController != null) {
+            attackController.SetAnimator(anim);
+            attackController.SetMotor(this);
+        }
 
         isFacingRight = !sprite.flipX;
 
@@ -54,6 +64,21 @@ public class CharacterMotor : MonoBehaviour
         if (dashMeter != null) {
             dashMeter.fillAmount = 1f;
             currentDashMeter = 100f;
+        }
+    }
+
+    protected void Start()
+    {
+        if (attackController != null) {
+            attackStateUpdaters = anim.GetBehaviours<AttackStateUpdater>();
+            foreach (AttackStateUpdater atkUptr in attackStateUpdaters) {
+                atkUptr.attackController = attackController;
+            }
+
+            hurtStateUpdaters = anim.GetBehaviours<HurtStateUpdater>();
+            foreach (HurtStateUpdater hrtUptr in hurtStateUpdaters) {
+                hrtUptr.attackController = attackController;
+            }
         }
     }
 
@@ -197,6 +222,16 @@ public class CharacterMotor : MonoBehaviour
         }
         if (!customDash) isDashing = true;
         return true;
+    }
+    
+    public void SetIsHurt(bool flag)
+    {
+        isHurt = flag;
+    }
+
+    public void SetAttackController(AttackController controller)
+    {
+        attackController = controller;
     }
 
     //private void OnDrawGizmos()

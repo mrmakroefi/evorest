@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeAttackController : MonoBehaviour {
+public class AttackController : MonoBehaviour {
 
     public enum TargetTag { Player, Enemy }
 
@@ -26,13 +26,11 @@ public class MeleeAttackController : MonoBehaviour {
 
     private bool preview = false;
     private Combos previewCombo;
-    [HideInInspector]
-    public bool isAttacking;
+
+    public bool isAttacking { get; private set; }
 
     protected virtual void Awake()
     {
-        motor = GetComponent<CharacterMotor>();
-        anim = GetComponentInChildren<Animator>();    
     }
 
     public void Attack()
@@ -65,6 +63,20 @@ public class MeleeAttackController : MonoBehaviour {
     {
         previewCombo = combo;
         this.preview = preview;
+    }
+    
+    public void SetIsAttack (bool flag){
+        isAttacking = flag;
+    }
+
+    public void SetAnimator (Animator anim)
+    {
+        this.anim = anim;
+    }
+
+    public void SetMotor(CharacterMotor motor)
+    {
+        this.motor = motor;
     }
 
     private void OnDrawGizmos()

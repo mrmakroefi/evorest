@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MeleeAttackController {
+public class PlayerAttack : AttackController {
 
     protected override void Awake()
     {
         base.Awake();
 
-        GameManager.gm.getPlayerAttack = this;
+        GameManager.gm.attackController = this;
     }
 
     private void Update()

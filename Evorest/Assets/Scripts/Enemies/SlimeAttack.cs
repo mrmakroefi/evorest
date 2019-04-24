@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeAttack : MeleeAttackController
+public class SlimeAttack : AttackController
 {
     private SlimeMovement movement;
 

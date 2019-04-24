@@ -5,7 +5,6 @@ using UnityEngine;
 public class SlimeMovement : CharacterMotor
 {   
     public GameObject target { get; private set; }
-    private Animator anim;
 
     public float minDistance = 0.3f;
 
@@ -13,7 +12,6 @@ public class SlimeMovement : CharacterMotor
     {
         base.Awake();
         target = GameObject.FindGameObjectWithTag("Player");
-        anim = GetComponentInChildren<Animator>();
     }
 
     protected override void FixedUpdate()
