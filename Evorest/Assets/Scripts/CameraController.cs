@@ -35,10 +35,10 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        Vector2 targetPosition = GameManager.gm.motor.getCollider2D.bounds.center + Vector3.up * verticalOffset;
+        Vector2 targetPosition = GameManager.gm.motor.coll2D.bounds.center + Vector3.up * verticalOffset;
 
         lookAheadDirX = GameManager.gm.motor.getFacingDir;
-        lookAheadDirY = Mathf.Sign(GameManager.gm.motor.getRb2D.velocity.y);
+        lookAheadDirY = Mathf.Sign(GameManager.gm.motor.rb2D.velocity.y);
 
         if (Mathf.Abs(PlayerInput.horizontalInput) > 0) {
             targetLookAheadX = 0;
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
             targetLookAheadX = lookAheadDirX * lookAheadDistanceX;
         }
 
-        if (Mathf.Abs(GameManager.gm.motor.getRb2D.velocity.y) > 0) {
+        if (Mathf.Abs(GameManager.gm.motor.rb2D.velocity.y) > 0) {
             targetLookAheadY = lookAheadDirY * lookAheadDistanceY;
         } else {
             targetLookAheadY = 0;

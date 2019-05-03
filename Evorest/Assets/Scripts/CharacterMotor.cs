@@ -7,10 +7,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider2D))]
 public class CharacterMotor : MonoBehaviour
 {
-    private Rigidbody2D rb2D;
-    private Collider2D coll2D;
+
+    public Rigidbody2D rb2D { get; private set; }
+    public Collider2D coll2D { get; private set; }
     public Animator anim { get; private set; }
-    private AttackController attackController;
+    public AttackController attackController { get; private set; }
 
     public SpriteRenderer sprite;                   // main sprite renderer
     public Image dashMeter;
@@ -32,6 +33,7 @@ public class CharacterMotor : MonoBehaviour
 
     private int dashDirection = 1;
 
+    private bool canDoubleJump = true;
     private bool doubleJumped = false;
 
     private float tempDashTime = 0;
@@ -87,29 +89,11 @@ public class CharacterMotor : MonoBehaviour
             return isFacingRight ? 1 : -1;
         }
     }
-
-    public Collider2D getCollider2D {
-        get {
-            if (coll2D != null) {
-                return coll2D;
-            }
-            return null;
-        }
-    }
-
-    public Rigidbody2D getRb2D {
-        get {
-            if (rb2D != null) {
-                return rb2D;
-            }
-            return null;
-        }
-    }
-
+    
     protected virtual void Update()
     {
         isGrounded = false;
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.02f, 0.05f), 0, groundMask);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(coll2D.bounds.center.x, coll2D.bounds.min.y), new Vector2(coll2D.bounds.size.x - 0.03f, 0.05f), 0, groundMask);
         for (int i = 0; i < colliders.Length; i++) {
             isGrounded = true;
         }
@@ -201,7 +185,7 @@ public class CharacterMotor : MonoBehaviour
         if (isGrounded) {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
             isDashing = false;
-        } else if (!doubleJumped) {
+        } else if (!doubleJumped && canDoubleJump) {
             doubleJumped = true;
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower * 0.7f);
             isDashing = false;
@@ -222,6 +206,11 @@ public class CharacterMotor : MonoBehaviour
         }
         if (!customDash) isDashing = true;
         return true;
+    }
+
+    public void SetCanDoubleJump (bool flag)
+    {
+        canDoubleJump = flag;
     }
     
     public void SetIsHurt(bool flag)

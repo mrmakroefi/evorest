@@ -13,9 +13,9 @@ public class PlayerMovement : CharacterMotor {
     protected override void Update()
     {
         base.Update();
-        anim.SetFloat("move", Mathf.Abs(getRb2D.velocity.x) * 0.5f);
+        anim.SetFloat("move", Mathf.Abs(rb2D.velocity.x) * 0.5f);
         anim.SetBool("grounded", isGrounded);
-        anim.SetFloat("verticalVelocity", getRb2D.velocity.y);
+        anim.SetFloat("verticalVelocity", rb2D.velocity.y);
         anim.SetBool("isDashing", isDashing);
         anim.SetBool("isMoving", PlayerInput.horizontalInput != 0);
     }

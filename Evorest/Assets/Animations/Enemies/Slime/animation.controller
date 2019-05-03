@@ -52,6 +52,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clearOnEnter: 1
   clearOnExit: 0
+--- !u!114 &114627836525061788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47261dc66d5c28443841f84e13f3a4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackController: {fileID: 0}
 --- !u!114 &114947712134497506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,6 +280,7 @@ AnimatorState:
   - {fileID: 1101792969390245466}
   m_StateMachineBehaviours:
   - {fileID: 114495659166177806}
+  - {fileID: 114627836525061788}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -305,31 +318,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 43b67c7aea69d9a49b4c3c2d88d5ad26, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &1102739635244386612
-AnimatorState:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: sline_move
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 52655942cdf6c7741821a31418b36c1c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -397,9 +385,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102589891822453630}
     m_Position: {x: 264, y: 108, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102739635244386612}
-    m_Position: {x: 516, y: 36, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102318244656205946}
     m_Position: {x: 552, y: 108, z: 0}

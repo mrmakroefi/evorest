@@ -18,17 +18,18 @@ public class SlimeMovement : CharacterMotor
     {
         base.FixedUpdate();
         int direction = (int)Mathf.Sign(target.transform.position.x - transform.position.x); ;
-        if (GetDistanceToTargetX() <= minDistance && (direction + getFacingDir != 0)) {
+        if (GetDistanceToTargetX() <= minDistance && (direction + getFacingDir != 0) || attackController.isAttacking) {
             direction = 0;
         }
 
         Move(direction);
+        
     }
 
     protected override void Update()
     {
         base.Update();
-        anim.SetFloat("move", Mathf.Abs(getRb2D.velocity.x) * 0.5f);
+        anim.SetFloat("move", Mathf.Abs(rb2D.velocity.x) * 0.5f);
     }
 
     public float GetDistanceToTargetX()

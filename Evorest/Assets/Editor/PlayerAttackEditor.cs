@@ -11,27 +11,29 @@ public class MeleeAttackControllerEditor : Editor {
     public override void OnInspectorGUI()
     {
         AttackController melee = (AttackController)target;
+        
+        if (melee.meleeCombos.Length > 0) {
+            index = EditorGUILayout.IntSlider("Element Index", index, 0, melee.meleeCombos.Length - 1);
+            AttackController.Combos combo = melee.meleeCombos[index];
 
-        index = EditorGUILayout.IntSlider("Element Index", index, 0, melee.meleeCombos.Length - 1);
-        AttackController.Combos combo = melee.meleeCombos[index];
+            EditorGUILayout.LabelField((preview ? "(On) " : "(Off) ") + combo.name);
 
-        EditorGUILayout.LabelField((preview ? "(On) " : "(Off) ") + combo.name);
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Preview")) {
+                preview = true;
+            }
 
-        EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Preview")) {
-            preview = true;
+            if (GUILayout.Button("Clear")) {
+                preview = false;
+                melee.UpdatePreviewHitbox(combo, false);
+            }
+            EditorGUILayout.EndHorizontal();
+            if (preview) {
+                melee.UpdatePreviewHitbox(combo, true);
+            }
         }
-
-        if (GUILayout.Button("Clear")) {
-            preview = false;
-            melee.UpdatePreviewHitbox(combo, false);
-        }
-        EditorGUILayout.EndHorizontal();
         base.OnInspectorGUI();
 
-        if (preview) {
-            melee.UpdatePreviewHitbox(combo, true);
-        }
     }
     
 
