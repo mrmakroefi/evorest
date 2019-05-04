@@ -24,6 +24,9 @@ public class CameraController : MonoBehaviour
 
     float horizontalCamExtent, verticalCamExtent;
 
+    [HideInInspector]
+    public bool preview;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -65,9 +68,12 @@ public class CameraController : MonoBehaviour
             );
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = new Color(1,1,0,0.1f);
-    //    Gizmos.DrawCube(boundary.center, boundary.size);
-    //}
+    // debugging
+    private void OnDrawGizmos()
+    {
+        if (preview) {
+            Gizmos.color = new Color(1, 1, 0, 0.1f);
+            Gizmos.DrawCube(boundary.center, boundary.size);
+        }
+    }
 }
