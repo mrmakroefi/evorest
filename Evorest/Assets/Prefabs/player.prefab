@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 60699595872823374}
   - component: {fileID: 114025781488484960}
   - component: {fileID: 114339128762475558}
+  - component: {fileID: 114970221036431614}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -100,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379567820322566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.18, y: -0.2, z: -0.08961408}
+  m_LocalPosition: {x: -1.18, y: -0.051, z: -0.08961408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4465655303670044}
@@ -163,11 +164,11 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1379567820322566}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c205a804dd96fb2479dc97d82878285e, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.02, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -182,10 +183,10 @@ PolygonCollider2D:
     - - {x: 0.080371976, y: 0.22415766}
       - {x: -0.09886181, y: 0.22410823}
       - {x: -0.11294627, y: 0.19959553}
-      - {x: -0.11301184, y: -0.3228985}
-      - {x: -0.09676719, y: -0.34438664}
-      - {x: 0.08521342, y: -0.3446284}
-      - {x: 0.09825325, y: -0.3251682}
+      - {x: -0.11395824, y: -0.36910325}
+      - {x: -0.10495174, y: -0.3971832}
+      - {x: 0.08649194, y: -0.3983624}
+      - {x: 0.096399546, y: -0.37156385}
       - {x: 0.09823096, y: 0.19960928}
 --- !u!95 &95780268630441664
 Animator:
@@ -222,12 +223,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 2
-  jumpPower: 6
+  jumpPower: 7
   dashEffect: {fileID: 198012081493226326}
   dashDistance: 1
   dashTime: 0.15
-  dashMeterFillingTime: 20
-  agility: 0.1
+  dashMeterFillingTime: 50
+  agility: 0.05
   inAirAgility: 0.07
 --- !u!114 &114339128762475558
 MonoBehaviour:
@@ -250,7 +251,7 @@ MonoBehaviour:
       width: 0.48
       height: 0.67
     damage: 12
-    knockbackPower: 0
+    knockbackPower: 0.1
     dashTime: 0.15
     dashDistance: 0.07
   - name: LL
@@ -261,7 +262,7 @@ MonoBehaviour:
       width: 0.59
       height: 0.57
     damage: 15
-    knockbackPower: 0
+    knockbackPower: 0.2
     dashTime: 0.15
     dashDistance: 0.14
   - name: LLL
@@ -272,7 +273,7 @@ MonoBehaviour:
       width: 0.9
       height: 0.41
     damage: 22
-    knockbackPower: 0
+    knockbackPower: 0.28
     dashTime: 0.15
     dashDistance: 0.23
   - name: airbone L
@@ -286,7 +287,6 @@ MonoBehaviour:
     knockbackPower: 0
     dashTime: 0.1
     dashDistance: 0.1
-  isAttacking: 0
 --- !u!114 &114607309552697888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,6 +300,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackController: {fileID: 114339128762475558}
   motor: {fileID: 114025781488484960}
+--- !u!114 &114970221036431614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1379567820322566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89c9be6bf1b32cd4fb5cfaf21dc2beec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motor: {fileID: 114025781488484960}
+  initialHP: 100
+  damagePopUp: {fileID: 1596796947627906, guid: 9d893522851a0f14c958fb1d1cb4e0ec,
+    type: 2}
+  flashMaterial: {fileID: 2100000, guid: d24eec6946acc614b8498086504100ae, type: 2}
+  flashTime: 0.1
 --- !u!198 &198012081493226326
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -4935,7 +4952,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f2c756bbc2464a248ba2bfc098e1f672, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 759cf7193f984ee4198cf049b13e8cc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

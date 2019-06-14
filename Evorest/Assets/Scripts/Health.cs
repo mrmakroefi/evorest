@@ -6,9 +6,12 @@ public class Health : MonoBehaviour, IDamageable
 {
     private Animator anim;
     public CharacterMotor motor;
+    public int initialHP = 100;
     public GameObject damagePopUp;
     public Material flashMaterial;
     public float flashTime = 0.1f;
+
+    public int HP { get; private set; }
 
     private SpriteRenderer spriteRenderer;
     private Material normalMaterial;
@@ -21,6 +24,11 @@ public class Health : MonoBehaviour, IDamageable
         anim = GetComponentInChildren<Animator>();
     }
 
+    void Start()
+    {
+        HP = initialHP;
+    }
+
     void Update()
     {
         if (currentFlashTime > 0) {
@@ -31,7 +39,16 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(float damage)
+    private void UpdateHP()
+    {
+        if (HP <= 0) {
+            // dead
+            print(transform.name + " was defeated!");
+            HP = initialHP;
+        }
+    }
+
+    public void Damage(int damage)
     {
         GameObject dmg = Instantiate(damagePopUp, transform.position + transform.up * Random.Range(0.3f, 0.5f) + transform.right * Random.Range(-.3f, .3f), Quaternion.identity);
 
@@ -42,11 +59,16 @@ public class Health : MonoBehaviour, IDamageable
 
         spriteRenderer.material = flashMaterial;
         currentFlashTime = flashTime;
+
+        HP -= damage;
+        UpdateHP();
     }
     
     public void Knockback(int direction, float amount)
     {
-        motor.Dash(direction, 0.15f, amount, true);
+        if (motor != null) {
+            motor.Dash(direction, 0.15f, amount, true);
+        }
     }
 
 }

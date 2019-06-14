@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 114803424358691292}
+  initialHP: 100
   damagePopUp: {fileID: 1596796947627906, guid: 9d893522851a0f14c958fb1d1cb4e0ec,
     type: 2}
   flashMaterial: {fileID: 2100000, guid: d24eec6946acc614b8498086504100ae, type: 2}

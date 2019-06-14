@@ -30,6 +30,7 @@ public class CharacterMotor : MonoBehaviour
     protected bool isGrounded { get; private set; }
     private bool lastFrameGrounded = false;
     public bool isHurt { get; private set; }
+    public bool canMove { get; private set; }
 
     private int dashDirection = 1;
 
@@ -58,6 +59,7 @@ public class CharacterMotor : MonoBehaviour
             attackController.SetAnimator(anim);
             attackController.SetMotor(this);
         }
+        canMove = true;
 
         isFacingRight = !sprite.flipX;
 
@@ -132,7 +134,7 @@ public class CharacterMotor : MonoBehaviour
 
         if (!customDash) {
             if (dashMeter != null) {
-                //currentDashMeter -= 50f;
+                currentDashMeter -= 50f;
             }
             isDashing = true;
         }
@@ -150,6 +152,7 @@ public class CharacterMotor : MonoBehaviour
 
     protected void Move(float direction)
     {
+        if (!canMove || isDashing) return;
         // snappy movement but smooth on the brakes
         float targetSmoothTime = Mathf.Abs(direction) > 0 ? 0.08f : agility;
         Vector2 targetVelocity = new Vector2(
@@ -160,12 +163,16 @@ public class CharacterMotor : MonoBehaviour
 
         //rb2D.velocity = new Vector2(Mathf.Clamp(rb2D.velocity.x, -maxSpeed, maxSpeed), rb2D.velocity.y);
 
-        if (!isDashing)
-            if (direction > 0 && !isFacingRight) {
-                SpriteFlip();
-            } else if (direction < 0 && isFacingRight) {
-                SpriteFlip();
-            }
+        FaceTarget(direction);
+    }
+
+    protected void FaceTarget(float direction)
+    {
+        if (direction > 0 && !isFacingRight) {
+            SpriteFlip();
+        } else if (direction < 0 && isFacingRight) {
+            SpriteFlip();
+        }
     }
 
     private void SpriteFlip()
@@ -216,6 +223,11 @@ public class CharacterMotor : MonoBehaviour
     public void SetIsHurt(bool flag)
     {
         isHurt = flag;
+    }
+
+    public void SetCanMove(bool flag)
+    {
+        canMove = flag;
     }
 
     public void SetAttackController(AttackController controller)

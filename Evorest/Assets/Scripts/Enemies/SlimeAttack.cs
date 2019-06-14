@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SlimeMovement))]
 public class SlimeAttack : AttackController
 {
     private SlimeMovement movement;
 
     private float attackCooldown = 0;
 
-    protected override void Awake()
+    protected  void Start()
     {
-        base.Awake();
         movement = (SlimeMovement)motor;
     }
 
     private void Update()
     {
-        if (movement.GetDistanceToTargetX() <= movement.minDistance && Time.time >= attackCooldown) {
+        if (movement.GetDistanceToTargetX() <= movement.minDistance && Time.time >= attackCooldown && movement.inRange) {
             Attack();
             attackCooldown = Time.time + 2f;
         }
