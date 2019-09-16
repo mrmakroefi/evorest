@@ -1,5 +1,5 @@
 # evorest
-nuclear post apocalypse shit action platformer
+action platformer shit
 
 prototype sprites by rvros
 
