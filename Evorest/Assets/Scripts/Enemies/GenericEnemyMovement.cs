@@ -37,6 +37,8 @@ public class GenericEnemyMovement : CharacterMotor {
     {
         base.FixedUpdate();
         canMove = true;
+
+        // cant do anything after being hit
         if (isHurt || Time.time < currentCooldownAfterHurt) {
             if (isHurt) {
                 currentCooldownAfterHurt = Time.time + cooldownAfterHurt;
@@ -44,6 +46,7 @@ public class GenericEnemyMovement : CharacterMotor {
             canMove = false;
         }
 
+        // get target direction relative to current position (left or right)
         float distance = GetDistanceToTarget();
         int direction = (int)Mathf.Sign(target.transform.position.x - transform.position.x); ;
         if (distance <= (isGrounded ? minDistance : 0) && (direction + getFacingDir != 0) || !canMove) {
@@ -54,6 +57,7 @@ public class GenericEnemyMovement : CharacterMotor {
 
         Move(direction);
 
+        // sensor update
         if (canMove) {
             if (direction == 1 && rightHole && (targetDirection == TargetDirection.right || targetDirection == TargetDirection.top)) {
                 Jump();
@@ -76,6 +80,7 @@ public class GenericEnemyMovement : CharacterMotor {
         anim.SetBool("grounded", isGrounded);
         anim.SetFloat("move", Mathf.Abs(rb2D.velocity.x) * 0.5f);
 
+        // get target direction relative to current position
         // up is positive
         if ((angle > 135 && angle <= 180) || (angle < -135 && angle >= -180)) {
             targetDirection = TargetDirection.left;

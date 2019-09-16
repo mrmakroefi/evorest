@@ -88,7 +88,7 @@ public class StomperMovement : CharacterMotor {
                 //    SetCanMove(false);
                 //}
             } else {
-                FaceTarget(direction);
+                FaceDirection(direction);
                 if (Time.time >= currentFlyingCooldown) {
                     rb2D.isKinematic = true;
                     flying = true;

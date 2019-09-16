@@ -14,8 +14,8 @@ public class SlimeMovement : CharacterMotor
 
     public Vector2 minVisibleDistance;
 
-    public bool targetAcquired { get; private set; }
-    public bool inRange { get; private set; }
+    public bool targetAcquired { get; private set; }    // target has been selected
+    public bool inRange { get; private set; }           // attack range
     private float deltaMovement = 0;
 
     private float currentStayTime = 0;

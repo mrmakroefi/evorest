@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 82.70001, y: 57}
-  m_SizeDelta: {x: 115.3, y: 70.3}
+  m_AnchoredPosition: {x: 169.29999, y: 95.399994}
+  m_SizeDelta: {x: 214.7, y: 131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &175203690
 MonoBehaviour:
@@ -5527,12 +5527,12 @@ PrefabInstance:
     - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.68
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
       propertyPath: InitialModule.startSizeY.scalar
-      value: 0.68
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
@@ -5704,13 +5704,68 @@ PrefabInstance:
       propertyPath: VelocityModule.y.maxCurve.m_Curve.Array.data[0].outWeight
       value: 0.17567568
       objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198012081493226326, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4842733146776518, guid: be6ba4ee104c651428936585721a60c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.723
+      value: -1.423
       objectReference: {fileID: 0}
     - target: {fileID: 4842733146776518, guid: be6ba4ee104c651428936585721a60c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.058
+      value: -0.075
       objectReference: {fileID: 0}
     - target: {fileID: 4842733146776518, guid: be6ba4ee104c651428936585721a60c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5744,16 +5799,26 @@ PrefabInstance:
     - target: {fileID: 114025781488484960, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
       propertyPath: dashTime
-      value: 0.15
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 114025781488484960, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
       propertyPath: dashMeterFillingTime
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 114025781488484960, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: dashDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114025781488484960, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: jumpAssistTime
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1722580347298940, guid: be6ba4ee104c651428936585721a60c9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212867529892672760, guid: be6ba4ee104c651428936585721a60c9,
         type: 3}
@@ -5799,6 +5864,67 @@ PrefabInstance:
         type: 3}
       propertyPath: meleeCombos.Array.data[0].dashDistance
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[1].attackArea.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[1].attackArea.width
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[1].attackArea.height
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[1].attackArea.y
+      value: -0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[2].attackArea.y
+      value: -0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[2].attackArea.width
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[2].attackArea.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[1].dashDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114339128762475558, guid: be6ba4ee104c651428936585721a60c9,
+        type: 3}
+      propertyPath: meleeCombos.Array.data[2].dashDistance
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915763151934316, guid: be6ba4ee104c651428936585721a60c9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915763151934316, guid: be6ba4ee104c651428936585721a60c9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915763151934316, guid: be6ba4ee104c651428936585721a60c9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4915763151934316, guid: be6ba4ee104c651428936585721a60c9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be6ba4ee104c651428936585721a60c9, type: 3}
@@ -6119,7 +6245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundary:
     m_Center: {x: 10.9, y: 3.66, z: 0}
-    m_Extent: {x: 14.5, y: 4.65, z: 0}
+    m_Extent: {x: 14.5, y: 5.08, z: 0}
   verticalOffset: 0.2
   lookAheadDistanceX: 0.2
   lookAheadDistanceY: 0.2
@@ -6153,7 +6279,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.7
+  orthographic size: 1.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6196,8 +6322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 75
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_RefResolutionX: 390
+  m_RefResolutionY: 216
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -6275,8 +6401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -143.41, y: 57}
-  m_SizeDelta: {x: 103.3, y: 103.3}
+  m_AnchoredPosition: {x: -240, y: 112.6}
+  m_SizeDelta: {x: 168.2, y: 168.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &944962549
 MonoBehaviour:
@@ -6835,8 +6961,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 198, y: 57}
-  m_SizeDelta: {x: 115.3, y: 70.3}
+  m_AnchoredPosition: {x: 384, y: 95.4}
+  m_SizeDelta: {x: 214.7, y: 131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1205670567
 MonoBehaviour:
@@ -7022,7 +7148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1441198216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7174,12 +7300,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 75
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1365, y: 768}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -7262,8 +7388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -51.3, y: 48.4}
-  m_SizeDelta: {x: 80.91, y: 80.91}
+  m_AnchoredPosition: {x: -90, y: 98.6}
+  m_SizeDelta: {x: 131.8, y: 131.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1658025604
 MonoBehaviour:
@@ -7462,6 +7588,18 @@ PrefabInstance:
     - target: {fileID: 4485824611706824, guid: 5bc586d19715c7742b4f43b1336fe02e, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485824611706824, guid: 5bc586d19715c7742b4f43b1336fe02e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485824611706824, guid: 5bc586d19715c7742b4f43b1336fe02e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485824611706824, guid: 5bc586d19715c7742b4f43b1336fe02e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2391
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc586d19715c7742b4f43b1336fe02e, type: 3}
@@ -7792,8 +7930,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -51.299988, y: 129.31}
-  m_SizeDelta: {x: 80.91, y: 80.91}
+  m_AnchoredPosition: {x: -90, y: 230.4}
+  m_SizeDelta: {x: 131.8, y: 131.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2072152679
 MonoBehaviour:

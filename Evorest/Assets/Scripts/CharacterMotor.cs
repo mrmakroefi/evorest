@@ -25,6 +25,7 @@ public class CharacterMotor : MonoBehaviour
     public float agility = 0.2f;
     public float inAirAgility = 1f;
 
+    private bool isJumping = false;
     protected bool isFacingRight = true;
     public bool isDashing { get; private set; }
     protected bool isGrounded { get; private set; }
@@ -36,6 +37,8 @@ public class CharacterMotor : MonoBehaviour
 
     private bool canDoubleJump = true;
     private bool doubleJumped = false;
+    private float jumpAssistTime = 0.5f;
+    private float currentJumpAssistTime = 0;
 
     private float tempDashTime = 0;
     private float currentDashTime = 0;
@@ -73,6 +76,7 @@ public class CharacterMotor : MonoBehaviour
 
     protected void Start()
     {
+        // intialize attackController on Mechanim behaviour
         if (attackController != null) {
             attackStateUpdaters = anim.GetBehaviours<AttackStateUpdater>();
             foreach (AttackStateUpdater atkUptr in attackStateUpdaters) {
@@ -100,6 +104,18 @@ public class CharacterMotor : MonoBehaviour
             isGrounded = true;
         }
 
+        // if we are not grounded because of falling off ledge instead of jumping then . . .
+        if (!isGrounded && !isJumping) {
+            currentJumpAssistTime += Time.deltaTime;
+            currentJumpAssistTime = currentJumpAssistTime >= jumpAssistTime ? jumpAssistTime : currentJumpAssistTime;       // clamp the value
+        }
+
+        // first frame of grounded
+        if (isGrounded && !lastFrameGrounded) {
+            isJumping = false;   // we are not jumping anymore
+            currentJumpAssistTime = 0; // reset jumpAssistTimer
+        }
+
         // reset double jump
         if (!lastFrameGrounded && isGrounded) doubleJumped = false;
 
@@ -116,6 +132,7 @@ public class CharacterMotor : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        // move overtime
         if (isDashing) {
             Dashing(dashDirection);
         }
@@ -124,6 +141,7 @@ public class CharacterMotor : MonoBehaviour
     public void Dash(int direction, float dashTime, float dashDistance, bool nonMovementDash, bool useEffect = false)
     {
         if (dashMeter != null) {
+            // if its regular dash and doesnt have enough dash meter. forget about dashing man!
             if (!customDash) if (currentDashMeter - 50 < 0) return;
         }
 
@@ -163,10 +181,10 @@ public class CharacterMotor : MonoBehaviour
 
         //rb2D.velocity = new Vector2(Mathf.Clamp(rb2D.velocity.x, -maxSpeed, maxSpeed), rb2D.velocity.y);
 
-        FaceTarget(direction);
+        FaceDirection(direction);
     }
 
-    protected void FaceTarget(float direction)
+    protected void FaceDirection(float direction)
     {
         if (direction > 0 && !isFacingRight) {
             SpriteFlip();
@@ -189,12 +207,15 @@ public class CharacterMotor : MonoBehaviour
 
     protected void Jump()
     {
-        if (isGrounded) {
+        if (isGrounded || currentJumpAssistTime < jumpAssistTime) {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower);
-            isDashing = false;
+            isJumping = true;
+            isDashing = false;  // cancel dash
+            currentJumpAssistTime = jumpAssistTime;
         } else if (!doubleJumped && canDoubleJump) {
-            doubleJumped = true;
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpPower * 0.7f);
+            doubleJumped = true;
+            isJumping = true;
             isDashing = false;
         }
     }
@@ -202,10 +223,17 @@ public class CharacterMotor : MonoBehaviour
     protected bool Dashing(int direction)
     {
         direction = (int)Mathf.Sign(direction);
+
+        // cancel dash by going to the other direction (create dash effect as new instance)
+        //if (direction - Mathf.RoundToInt(-PlayerInput.horizontalInput) == 0) {
+        //    isDashing = false;
+        //    return false;
+        //}
+
         rb2D.velocity = new Vector2(direction * currentDashDistance * (1 / currentDashTime), customDash ? rb2D.velocity.y : 0);
 
         // waiting dash timer to end
-        tempDashTime -= Time.deltaTime;
+        tempDashTime -= Time.fixedDeltaTime;
         if (tempDashTime <= 0) {
             tempDashTime = currentDashTime;
             if (!customDash) isDashing = false;
